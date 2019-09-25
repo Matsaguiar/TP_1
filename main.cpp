@@ -25,8 +25,8 @@ int main(){
         system(CLEAR);
 
         cout << "\n\tVenda de ingressos de jogos de futebol" << endl << endl;
-        cout << "   (1)  - Iteracao usuario" << endl;
-        cout << "   (2)  - Iteracao jogo" << endl << endl;
+        cout << "    (1)  - Iteracao usuario" << endl;
+        cout << "    (2)  - Iteracao jogo" << endl << endl;
         cout << "   (-1) - Sair do programa" << endl << endl;
         cout << "Digite uma opcao: ";
 
@@ -39,9 +39,9 @@ int main(){
             do{
                 system(CLEAR);
                 cout << "\tOperacao usuario\n\n" << endl;
-                cout << "   (1)  - Cadastrar usuario" << endl;
-                cout << "   (2)  - Descadastrar usuario" << endl;
-                cout << "   (0)  - Voltar para o menu" << endl << endl;
+                cout << "    (1)  - Cadastrar usuario" << endl;
+                cout << "    (2)  - Descadastrar usuario" << endl;
+                cout << "    (0)  - Voltar para o menu" << endl << endl;
                 cout << "   (-1) - Sair do programa" << endl << endl;
                 cout << "Digite uma opcao: ";
 
@@ -108,11 +108,11 @@ int main(){
 
             do{
                 cout << "\tOperacao jogo\n\n" << endl;
-                cout << "   (1)  - Cadastrar jogo" << endl;
-                cout << "   (2)  - Descadastrar jogo" << endl;
-                cout << "   (3)  - Informacoes de jogos" << endl;
-                cout << "   (4)  - Informacao de venda de um jogo" << endl;
-                cout << "   (0)  - Voltar para o menu" << endl << endl;
+                cout << "    (1)  - Cadastrar jogo" << endl;
+                cout << "    (2)  - Descadastrar jogo" << endl;
+                cout << "    (3)  - Informacoes de jogos" << endl;
+                cout << "    (4)  - Informacao de venda de um jogo" << endl;
+                cout << "    (0)  - Voltar para o menu" << endl << endl;
                 cout << "   (-1) - Sair do programa" << endl << endl;
                 cout << "Digite uma opcao: ";
 
