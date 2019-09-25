@@ -48,9 +48,10 @@ int main(){
 
                 if(operacao == 1){
                     system(CLEAR);
-                    cout << "Digite o CPF (sem pontos e sem barra): ";
+                    cout << "Informe seu CPF sem pontos e sem barra!" << endl << "Informe sua senha que DEVE conter pelo menos 1 letra maiscula, 1 letra minuscula e 1 numero!" << endl << endl;
+                    cout << "Informe seu CPF: ";
                     cin >> cpfAux;
-                    cout << endl << "Digite sua senha" << endl << "Obs: Sua senha DEVE conter pelo menos 1 letra maiscula, 1 letra minuscula e 1 numero!" << endl << "Informe a senha: ";
+                    cout << "Informe a senha: ";
                     cin >> senhaAux;
                     cadastroUsuario user(cpfAux, senhaAux);
                     usuarios.push_back(user);
