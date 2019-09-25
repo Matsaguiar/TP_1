@@ -25,8 +25,8 @@ int main(){
         system(CLEAR);
 
         cout << "\n\tVenda de ingressos de jogos de futebol" << endl << endl;
-        cout << "   (1)  - Operacao usuario" << endl;
-        cout << "   (2)  - Operacao jogo" << endl << endl;
+        cout << "   (1)  - Iteracao usuario" << endl;
+        cout << "   (2)  - Iteracao jogo" << endl << endl;
         cout << "   (-1) - Sair do programa" << endl << endl;
         cout << "Digite uma opcao: ";
 
@@ -37,6 +37,7 @@ int main(){
             system(CLEAR);
 
             do{
+                system(CLEAR);
                 cout << "\tOperacao usuario\n\n" << endl;
                 cout << "   (1)  - Cadastrar usuario" << endl;
                 cout << "   (2)  - Descadastrar usuario" << endl;
@@ -62,16 +63,43 @@ int main(){
                     }
                     system("PAUSE");*/
                     system(CLEAR);
-                    cout << endl << "\tUsuario cadastrado com sucesso!";
+                    cout << endl << "\tUsuario cadastrado com sucesso!" << endl << endl << "Aperte qualquer botao para continuar!";
                     getchar();
                     getchar();
-                    system(CLEAR);
                 }
                 if(operacao == 2){
-
+                    system(CLEAR);
+                    for(i = 0; i < usuarios.size(); i++){
+                        cout << "Usuario " << i + 1 << endl;
+                        cout << "   CPF: " << usuarios[i].getCPF() << endl;
+                    }
+                    if(usuarios.size() > 0){
+                        int du; /*Descadastrar Usuario*/
+                        cout << endl << "Digite o numero do usuario que deseja descadastrar: ";
+                        cin >> du;
+                        cout << endl << "Digite sua senha: ";
+                        cin >> senhaAux;
+                        du -=1;
+                        if (senhaAux == usuarios[du].getSenha()){
+                            usuarios.erase(usuarios.begin()+du);
+                            system(CLEAR);
+                            cout << endl << "\tUsuario descadastrado com sucesso!" << endl << endl << "Aperte qualquer botao para continuar!";
+                            getchar();
+                            getchar();
+                        }else {
+                            system(CLEAR);
+                            cout << endl << "\tSenha incorreta! Nao foi possivel descadastrar usuario!" << endl << endl << "Aperte qualquer botao para continuar!";
+                            getchar();
+                            getchar();
+                        }
+                    }
+                    else{
+                        system(CLEAR);
+                        cout << endl << "\tNao ha usuarios cadastrados!" << endl << endl << "Aperte qualquer botao para continuar!";
+                        getchar();
+                        getchar();
+                    }
                 }
-
-
             }while(operacao != 0 && operacao != -1);
         }
 
