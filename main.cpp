@@ -2,6 +2,7 @@
 #include <string>
 #include <stdlib.h>
 #include <vector>
+#include <stdio.h>
 #include "usuario.h"
 
 #ifdef _WIN32
@@ -46,9 +47,10 @@ int main(){
                 cin >> operacao;
 
                 if(operacao == 1){
+                    system(CLEAR);
                     cout << "Digite o CPF (sem pontos e sem barra): ";
                     cin >> cpfAux;
-                    cout << "Digite sua senha: ";
+                    cout << endl << "Digite sua senha" << endl << "Obs: Sua senha DEVE conter pelo menos 1 letra maiscula, 1 letra minuscula e 1 numero!" << endl << "Informe a senha: ";
                     cin >> senhaAux;
                     cadastroUsuario user(cpfAux, senhaAux);
                     usuarios.push_back(user);
@@ -58,7 +60,11 @@ int main(){
                         cout << "   Senha: " << usuarios[i].getSenha() << endl << endl;
                     }
                     system("PAUSE");*/
-
+                    system(CLEAR);
+                    cout << endl << "\tUsuario cadastrado com sucesso!";
+                    getchar();
+                    getchar();
+                    system(CLEAR);
                 }
                 if(operacao == 2){
 
