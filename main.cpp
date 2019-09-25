@@ -4,6 +4,7 @@
 #include <vector>
 #include <stdio.h>
 #include "usuario.h"
+#include "senha.cpp"
 
 #ifdef _WIN32
     # define CLEAR "cls"
@@ -49,23 +50,28 @@ int main(){
 
                 if(operacao == 1){
                     system(CLEAR);
-                    cout << "Informe seu CPF sem pontos e sem barra!" << endl << "Informe sua senha que DEVE conter pelo menos 1 letra maiscula, 1 letra minuscula e 1 numero!" << endl << endl;
+                    cout << "Informe seu CPF sem pontos e sem barra!" << endl << "Informe sua senha (com 6 caracteres) que DEVE conter pelo menos 1 letra maiscula, 1 letra minuscula e 1 numero!" << endl << endl;
                     cout << "Informe seu CPF: ";
                     cin >> cpfAux;
                     cout << "Informe a senha: ";
                     cin >> senhaAux;
-                    cadastroUsuario user(cpfAux, senhaAux);
-                    usuarios.push_back(user);
-                    /*for(i = 0; i < usuarios.size(); i++){
-                        cout << "Usuario " << i + 1 << endl;
-                        cout << "   CPF..: " << usuarios[i].getCPF() << endl;
-                        cout << "   Senha: " << usuarios[i].getSenha() << endl << endl;
+
+                    if(senha(senhaAux, (senhaAux.size())) == 1){
+                        cadastroUsuario user(cpfAux, senhaAux);
+                        usuarios.push_back(user);
+                        system(CLEAR);
+                        cout << endl << "\tUsuario cadastrado com sucesso!" << endl << endl << "Aperte qualquer botao para continuar!";
+                        getchar();
+                        getchar();
+                    }else {
+                        cout << endl << "#####################################################################" << endl;
+                        cout << "#   Senha fora dos parametros! Nao foi possivel fazer o cadastro!   #" << endl;
+                        cout << "#####################################################################" << endl;
+                        cout << endl << "Aperte qualquer botao para continuar!";
+                        getchar();
+                        getchar();
                     }
-                    system("PAUSE");*/
-                    system(CLEAR);
-                    cout << endl << "\tUsuario cadastrado com sucesso!" << endl << endl << "Aperte qualquer botao para continuar!";
-                    getchar();
-                    getchar();
+
                 }
                 if(operacao == 2){
                     system(CLEAR);
