@@ -106,10 +106,73 @@ bool checkLuhn(string cardNo){
 int cartao(string cardNo){
 
 	//string cardNo = "4975230016422686";
-	if (checkLuhn(cardNo))
-		printf("This is a valid card");
-	else
-		printf("This is not a valid card");
-	return 0;
+	if (checkLuhn(cardNo)){
+		return 1;
+	}else{
+		return 0;
+	}
 }
+
+/*##################################################################################################################################################
+####################################################################################################################################################
+##################################################################################################################################################*/
+
+inline bool validaCPF(const int * const cpf)
+{
+    int digito1, digito2, temp = 0;
+
+    for(char i = 0; i < 9; i++)
+        temp += (cpf[i] * (10 - i));
+
+    temp %= 11;
+
+    if(temp < 2)
+        digito1 = 0;
+    else
+        digito1 = 11 - temp;
+
+    temp = 0;
+    for(char i = 0; i < 10; i++)
+        temp += (cpf[i] * (11 - i));
+
+    temp %= 11;
+
+    if(temp < 2)
+        digito2 = 0;
+    else
+        digito2 = 11 - temp;
+
+    if(digito1 == cpf[9] && digito2 == cpf[10])
+        return true;
+    else
+        return false;
+}
+
+int verificaCPF(string cpfAux){
+
+    if(cpfAux.size() != 11){
+        return 0;
+    }
+
+    int cpf[11];
+    string input;
+
+    input = cpfAux;
+
+    for(char i = 0; i < 11; i++)
+    {
+        cpf[i] = static_cast<int>(input[i] - 48); //Convertendo char para valor absoluto segundo tabela ASCII e passando para array de inteiros//
+
+        if(cpf[i] < 0 || cpf[i] > 9){ //Validando a entrada de dados
+            cout << "ENTRADA INVALIDA" << endl;
+            return 1;}
+    }
+
+    if(validaCPF(cpf) == true){
+        return 1;
+    }else{
+        return 0;
+    }
+}
+
 
