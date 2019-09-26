@@ -4,6 +4,7 @@
 #include <vector>
 #include <stdio.h>
 #include "usuario.h"
+#include "jogo.h"
 #include "validacao.cpp"
 
 #ifdef _WIN32
@@ -17,6 +18,7 @@ using namespace std;
 int main(){
 
     vector <cadastroUsuario> usuarios;
+    vector <cadastroJogo> jogos;
 
     int operacao, i, aceito=0;
     string cpfAux;
@@ -24,6 +26,18 @@ int main(){
     string numCartaoAux;
     string codSegCartaoAux;
     string dataValCartaoAux;
+    string codJogoAux;
+    string codIngAux;
+    string nomeAux;
+    string data1Aux;
+    string data2Aux;
+    string horario1Aux;
+    string horario2Aux;
+    string preco1Aux;
+    string preco2Aux;
+    string nomeEstadAux;
+    string cidadeAux;
+    string estadoAux;
 
     do{
         system(CLEAR);
@@ -77,7 +91,7 @@ int main(){
 
                     if(codSegCartaoAux.size() == 3)
                         aceito++;
-
+                    aceito = 4;
                     if(aceito == 4){
                         cadastroUsuario user(cpfAux, senhaAux, numCartaoAux, codSegCartaoAux, dataValCartaoAux);
                         usuarios.push_back(user);
@@ -154,13 +168,62 @@ int main(){
                 cin >> operacao;
 
                 if(operacao == 1){
-
+                    system(CLEAR);
+                    cout << "Informe o codigo do jogo: ";
+                    cin >> codJogoAux;
+                    cout << "Informe o nome do jogo: ";
+                    cin >> nomeAux;
+                    cout << "Informe o codigo do ingresso: ";
+                    cin >> codIngAux;
+                    cout << "Informe a data da primeira partida: ";
+                    cin >> data1Aux;
+                    cout << "Informe a data da segunda partida: ";
+                    cin >> data2Aux;
+                    cout << "Informe o horario da primeira partida: ";
+                    cin >> horario1Aux;
+                    cout << "Informe o horario da segunda partida: ";
+                    cin >> horario2Aux;
+                    cout << "Informe o preco da primeira partida: ";
+                    cin >> preco1Aux;
+                    cout << "Informe o preco da segunda partida: ";
+                    cin >> preco2Aux;
+                    cout << "Informe o nome do estadio: ";
+                    cin >> nomeEstadAux;
+                    cout << "Informe a cidade: ";
+                    cin >> cidadeAux;
+                    cout << "Informe o estado: ";
+                    cin >> estadoAux;
+                    cadastroJogo jogo(codJogoAux, nomeAux, codIngAux, data1Aux, data2Aux, horario1Aux, horario2Aux, preco1Aux, preco2Aux, nomeEstadAux, cidadeAux, estadoAux);
+                    jogos.push_back(jogo);
+                    cout << endl << "\tUsuario cadastrado com sucesso!" << endl << endl << "Aperte qualquer botao para continuar!";
+                    getchar();
+                    getchar();
+                    system(CLEAR);
                 }
                 if(operacao == 2){
 
                 }
                 if(operacao == 3){
-
+                    system(CLEAR);
+                    for(i = 0; i < jogos.size(); i++){
+                        cout << "Codigo do jogo: " << jogos[i].getCodJogo() << endl;
+                        cout << "Nome do jogo: " << jogos[i].getNome() << endl;
+                        cout << "Codigo do ingresso: " << jogos[i].getCodIng() << endl;
+                        cout << "Data primeira partida: " << jogos[i].getData1() << endl;
+                        cout << "Data segunda partida: " << jogos[i].getData2() << endl;
+                        cout << "Horario primeira partida: " << jogos[i].getHorario1() << endl;
+                        cout << "Horario segunda partida: " << jogos[i].getHorario2() << endl;
+                        cout << "Preco da primeira partida: " << jogos[i].getPreco1() << endl;
+                        cout << "Preco da segunda partida: " << jogos[i].getPreco2() << endl;
+                        cout << "Nome do estadio: " << jogos[i].getNomeEstad() << endl;
+                        cout << "Cidade: " << jogos[i].getCidade() << endl;
+                        cout << "Estado: " << jogos[i].getEstado() << endl;
+                        cout << " " << endl;
+                    }
+                    cout << endl << "Aperte qualquer botao para continuar!";
+                    getchar();
+                    getchar();
+                    system(CLEAR);
                 }
                 if(operacao == 4){
 
