@@ -53,7 +53,7 @@ int main(){
 
                 if(operacao == 1){
                     system(CLEAR);
-                    cout << "Informe seu CPF sem pontos e sem barra!" << endl << "Informe sua senha (com 6 caracteres) que DEVE conter pelo menos 1 letra maiscula, 1 letra minuscula e 1 numero!" << endl;
+                    cout << "Informe seu CPF sem pontos, espacos ou tracos!" << endl << "Informe sua senha (com 6 caracteres) que DEVE conter pelo menos 1 letra maiscula, 1 letra minuscula e 1 numero!" << endl;
                     cout << "Informe os numeros do seu cartao de credito sem pontos!" << endl << "Informe a data de validade do cartao no formato: MM/AA" << endl << endl;
                     cout << "Informe seu CPF: ";
                     cin >> cpfAux;
@@ -66,35 +66,41 @@ int main(){
                     cout << "Informe a validade do seu cartao de credito: ";
                     cin >> dataValCartaoAux;
 
-                    if(senha(senhaAux, (senhaAux.size())) == 1){
-                        cout << endl << "\tSenha aceita!" << endl;
+                    if(verificaCPF(cpfAux) == 1)
                         aceito++;
-                    }else {
-                        cout << endl << "\tSenha nao aceita!" << endl;
-                    }
 
-                    if(cartao(numCartaoAux) == 1){
-                        cout << endl << "\tCartao aceito!" << endl;
+                    if(senha(senhaAux, (senhaAux.size())) == 1)
                         aceito++;
-                    }else {
-                        cout << endl << "\tCartao nao aceito!" << endl;
-                    }
 
-                    if(codSegCartaoAux.size() == 3){
+                    if(cartao(numCartaoAux) == 1)
                         aceito++;
-                        cout << endl << "\tCodigo de seguranca aceito!" << endl;
-                    }else {
-                        cout << endl << "\tCodigo de seguranca nao aceito!" << endl;
-                    }
 
-                    if(aceito == 3){
+                    if(codSegCartaoAux.size() == 3)
+                        aceito++;
+
+                    if(aceito == 4){
                         cadastroUsuario user(cpfAux, senhaAux, numCartaoAux, codSegCartaoAux, dataValCartaoAux);
                         usuarios.push_back(user);
-                        system(CLEAR);
-                        cout << endl << "\tUsuario descadastrado com sucesso!" << endl << endl << "Aperte qualquer botao para continuar!";
-                        getchar();
-                        getchar();
+                        //system(CLEAR);
+                        cout << endl << "\tUsuario cadastrado com sucesso!" << endl << endl << "Aperte qualquer botao para continuar!";
+                    }else {
+                        cout << endl << "\tUsuario nao cadastrado!" << endl << endl;
+
+                        if(verificaCPF(cpfAux) == 0)
+                            cout << "CPF invalido!" << endl;
+
+                        if(senha(senhaAux, (senhaAux.size())) == 0)
+                            cout << "Senha invalida!" << endl;
+
+                        if(cartao(numCartaoAux) == 0)
+                            cout << "Numero do cartao de credito invalido!" << endl;
+
+                        if(codSegCartaoAux.size() != 3)
+                            cout << "Codigo de seguranca fora do formato padrao!" << endl;
                     }
+                    cout << endl << "\tTente novamente" << endl << endl << "Aperte qualquer botao para continuar!";
+                    getchar();
+                    getchar();
                 }
                 if(operacao == 2){
                     system(CLEAR);
