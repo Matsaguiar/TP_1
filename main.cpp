@@ -100,7 +100,6 @@ int main(){
                         getchar();
                         getchar();
                     }
-                    }
 
                     cout << "Informe a validade do seu cartao de credito: ";
                     cin >> dataValCartaoAux;
