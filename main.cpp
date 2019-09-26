@@ -4,7 +4,7 @@
 #include <vector>
 #include <stdio.h>
 #include "usuario.h"
-#include "senha.cpp"
+#include "validacao.cpp"
 
 #ifdef _WIN32
     # define CLEAR "cls"
@@ -21,6 +21,9 @@ int main(){
     int operacao, i;
     string cpfAux;
     string senhaAux;
+    string numCartaoAux;
+    string codSegCartaoAux;
+    string dataValCartaoAux;
 
     do{
         system(CLEAR);
@@ -50,17 +53,16 @@ int main(){
 
                 if(operacao == 1){
                     system(CLEAR);
-                    cout << "Informe seu CPF sem pontos e sem barra!" << endl << "Informe sua senha (com 6 caracteres) que DEVE conter pelo menos 1 letra maiscula, 1 letra minuscula e 1 numero!" << endl << endl;
+                    cout << "Informe seu CPF sem pontos e sem barra!" << endl << "Informe sua senha (com 6 caracteres) que DEVE conter pelo menos 1 letra maiscula, 1 letra minuscula e 1 numero!" << endl;
+                    cout << "Informe os numeros do seu cartao de credito sem pontos!" << endl << "Informe a data de validade do cartao no formato: MM/AA" << endl << endl;
                     cout << "Informe seu CPF: ";
                     cin >> cpfAux;
                     cout << "Informe a senha: ";
                     cin >> senhaAux;
 
                     if(senha(senhaAux, (senhaAux.size())) == 1){
-                        cadastroUsuario user(cpfAux, senhaAux);
-                        usuarios.push_back(user);
                         system(CLEAR);
-                        cout << endl << "\tUsuario cadastrado com sucesso!" << endl << endl << "Aperte qualquer botao para continuar!";
+                        cout << endl << "\tSenha aceita!" << endl << endl << "Aperte qualquer botao para continuar!";
                         getchar();
                         getchar();
                     }else {
@@ -72,6 +74,39 @@ int main(){
                         getchar();
                     }
 
+                    cout << "Informe os numeros do seu cartao de credito: ";
+                    cin >> numCartaoAux;
+
+                    if(cartao(numCartaoAux) == 1){
+                        cout << endl << "\tCartao aceito!" << endl << endl << "Aperte qualquer botao para continuar!";
+                    }else {
+                        cout << endl << "###########################################################" << endl;
+                        cout << "#   Cartao invalido! Nao foi possivel fazer o cadastro!   #" << endl;
+                        cout << "###########################################################" << endl;
+                        cout << endl << "Aperte qualquer botao para continuar!";
+                        getchar();
+                        getchar();
+                    }
+
+                    cout << "Informe o codigo de segurança: ";
+                    cin >> codSegCartaoAux;
+                    if(codSegCartaoAux.size() == 3){
+                        cout << endl << "\tCodigo de seguranca aceito!" << endl << endl << "Aperte qualquer botao para continuar!";
+                    }else {
+                        cout << endl << "##############################################################################" << endl;
+                        cout << "#   Codigo de seguranca fora do padrao! Nao foi possivel fazer o cadastro!   #" << endl;
+                        cout << "##############################################################################" << endl;
+                        cout << endl << "Aperte qualquer botao para continuar!";
+                        getchar();
+                        getchar();
+                    }
+                    }
+
+                    cout << "Informe a validade do seu cartao de credito: ";
+                    cin >> dataValCartaoAux;
+
+                    cadastroUsuario user(cpfAux, senhaAux, numCartaoAux, codSegCartaoAux, dataValCartaoAux);
+                    usuarios.push_back(user);
                 }
                 if(operacao == 2){
                     system(CLEAR);
