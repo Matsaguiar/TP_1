@@ -22,7 +22,7 @@ private:
     void setCPF(string cpfAux);
     void setSenha(string senhaAux);
     void setNumCartao(string numCartaoAux);
-    void setCodSegCartao(string CodSegCartaoAux);
+    void setCodSegCartao(string codSegCartaoAux);
     void setDataValCartao(string dataValCartaoAux);
 };
 
@@ -48,13 +48,13 @@ void cadastroUsuario::setCPF(string cpfAux){
 void cadastroUsuario::setSenha(string senhaAux){
     senha = senhaAux;
 }
-void setNumCartao(string NumCartaoAux){
+void cadastroUsuario::setNumCartao(string numCartaoAux){
     numCartao = numCartaoAux;
 }
-void setCodSegCartao(string codSegCartaoAux){
+void cadastroUsuario::setCodSegCartao(string codSegCartaoAux){
     codSegCartao = codSegCartaoAux;
 }
-void setDataValCartao(string dataValCartaoAux){
+void cadastroUsuario::setDataValCartao(string dataValCartaoAux){
     dataValCartao = dataValCartaoAux;
 }
 
