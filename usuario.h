@@ -6,17 +6,41 @@ using namespace std;
 class cadastroUsuario{
 
 public:
-    cadastroUsuario(string cpfAux, string senhaAux);
+    cadastroUsuario(string cpfAux, string senhaAux, string numCartaoAux, string codSegCartaoAux, string dataValCartaoAux);
     string getCPF();
     string getSenha();
+    string getNumCartao();
+    string getCodSegCartao();
+    string getDataValCartao();
 
 private:
-    void setCPF(string cpfAux);
-    void setSenha(string senhaAux);
     string cpf;
     string senha;
-
+    string numCartao;
+    string codSegCartao;
+    string dataValCartao;
+    void setCPF(string cpfAux);
+    void setSenha(string senhaAux);
+    void setNumCartao(string numCartaoAux);
+    void setCodSegCartao(string CodSegCartaoAux);
+    void setDataValCartao(string dataValCartaoAux);
 };
+
+string cadastroUsuario::getCPF(){
+    return cpf;
+}
+string cadastroUsuario::getSenha(){
+    return senha;
+}
+string cadastroUsuario::getNumCartao(){
+    return numCartao;
+}
+string cadastroUsuario::getCodSegCartao(){
+    return codSegCartao;
+}
+string cadastroUsuario::getDataValCartao(){
+    return dataValCartao;
+}
 
 void cadastroUsuario::setCPF(string cpfAux){
     cpf = cpfAux;
@@ -24,16 +48,23 @@ void cadastroUsuario::setCPF(string cpfAux){
 void cadastroUsuario::setSenha(string senhaAux){
     senha = senhaAux;
 }
-string cadastroUsuario::getCPF(){
-    return cpf;
+void setNumCartao(string NumCartaoAux){
+    numCartao = numCartaoAux;
 }
-string cadastroUsuario::getSenha(){
-    return senha;
+void setCodSegCartao(string codSegCartaoAux){
+    codSegCartao = codSegCartaoAux;
+}
+void setDataValCartao(string dataValCartaoAux){
+    dataValCartao = dataValCartaoAux;
 }
 
-cadastroUsuario::cadastroUsuario(string cpfAux, string senhaAux){
+cadastroUsuario::cadastroUsuario(string cpfAux, string senhaAux, string numCartaoAux, string codSegCartaoAux, string dataValCartaoAux){
     setCPF(cpfAux);
     setSenha(senhaAux);
+    setNumCartao(numCartaoAux);
+    setCodSegCartao(codSegCartaoAux);
+    setDataValCartao(dataValCartaoAux);
 }
+
 
 #endif // USUARIO_H_INCLUDED
