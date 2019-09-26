@@ -18,7 +18,7 @@ int main(){
 
     vector <cadastroUsuario> usuarios;
 
-    int operacao, i;
+    int operacao, i, aceito=0;
     string cpfAux;
     string senhaAux;
     string numCartaoAux;
@@ -59,53 +59,42 @@ int main(){
                     cin >> cpfAux;
                     cout << "Informe a senha: ";
                     cin >> senhaAux;
-
-                    if(senha(senhaAux, (senhaAux.size())) == 1){
-                        system(CLEAR);
-                        cout << endl << "\tSenha aceita!" << endl << endl << "Aperte qualquer botao para continuar!";
-                        getchar();
-                        getchar();
-                    }else {
-                        cout << endl << "#####################################################################" << endl;
-                        cout << "#   Senha fora dos parametros! Nao foi possivel fazer o cadastro!   #" << endl;
-                        cout << "#####################################################################" << endl;
-                        cout << endl << "Aperte qualquer botao para continuar!";
-                        getchar();
-                        getchar();
-                    }
-
                     cout << "Informe os numeros do seu cartao de credito: ";
                     cin >> numCartaoAux;
-
-                    if(cartao(numCartaoAux) == 1){
-                        cout << endl << "\tCartao aceito!" << endl << endl << "Aperte qualquer botao para continuar!";
-                    }else {
-                        cout << endl << "###########################################################" << endl;
-                        cout << "#   Cartao invalido! Nao foi possivel fazer o cadastro!   #" << endl;
-                        cout << "###########################################################" << endl;
-                        cout << endl << "Aperte qualquer botao para continuar!";
-                        getchar();
-                        getchar();
-                    }
-
                     cout << "Informe o codigo de segurança: ";
                     cin >> codSegCartaoAux;
-                    if(codSegCartaoAux.size() == 3){
-                        cout << endl << "\tCodigo de seguranca aceito!" << endl << endl << "Aperte qualquer botao para continuar!";
-                    }else {
-                        cout << endl << "##############################################################################" << endl;
-                        cout << "#   Codigo de seguranca fora do padrao! Nao foi possivel fazer o cadastro!   #" << endl;
-                        cout << "##############################################################################" << endl;
-                        cout << endl << "Aperte qualquer botao para continuar!";
-                        getchar();
-                        getchar();
-                    }
-
                     cout << "Informe a validade do seu cartao de credito: ";
                     cin >> dataValCartaoAux;
 
-                    cadastroUsuario user(cpfAux, senhaAux, numCartaoAux, codSegCartaoAux, dataValCartaoAux);
-                    usuarios.push_back(user);
+                    if(senha(senhaAux, (senhaAux.size())) == 1){
+                        cout << endl << "\tSenha aceita!" << endl;
+                        aceito++;
+                    }else {
+                        cout << endl << "\tSenha nao aceita!" << endl;
+                    }
+
+                    if(cartao(numCartaoAux) == 1){
+                        cout << endl << "\tCartao aceito!" << endl;
+                        aceito++;
+                    }else {
+                        cout << endl << "\tCartao nao aceito!" << endl;
+                    }
+
+                    if(codSegCartaoAux.size() == 3){
+                        aceito++;
+                        cout << endl << "\tCodigo de seguranca aceito!" << endl;
+                    }else {
+                        cout << endl << "\tCodigo de seguranca nao aceito!" << endl;
+                    }
+
+                    if(aceito == 3){
+                        cadastroUsuario user(cpfAux, senhaAux, numCartaoAux, codSegCartaoAux, dataValCartaoAux);
+                        usuarios.push_back(user);
+                        system(CLEAR);
+                        cout << endl << "\tUsuario descadastrado com sucesso!" << endl << endl << "Aperte qualquer botao para continuar!";
+                        getchar();
+                        getchar();
+                    }
                 }
                 if(operacao == 2){
                     system(CLEAR);
