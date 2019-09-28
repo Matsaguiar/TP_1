@@ -8,38 +8,39 @@ class cadastroJogo{
 public:
     cadastroJogo(string cpfAux, string codJogoAux, string nomeAux, string codIngAux, string dataAux, string horarioAux, string precoAux, string nomeEstadAux, string cidadeAux, string estadoAux);
     string getCPF();
-    string getCodJogo();
     string getNome();
-    string getCodIng();
     string getData();
-    string getHorario();
     string getPreco();
-    string getNomeEstad();
+    string getCodIng();
     string getCidade();
     string getEstado();
+    string getCodJogo();
+    string getHorario();
+    string getNomeEstad();
+    int qtIngressoDisponivel;
 
 private:
     string cpf;
-    string codJogo;
-    string codIng;
     string nome;
     string data;
-    string horario;
     string preco;
-    string nomeEstad;
+    string codIng;
     string cidade;
     string estado;
+    string codJogo;
+    string horario;
+    string nomeEstad;
 
     void setCPF(string cpfAux);
-    void setCodJogo(string codJogoAux);
     void setNome(string nomeAux);
-    void setCodIng(string codIngAux);
     void setData(string dataAux);
-    void setHorario(string horarioAux);
     void setPreco(string precoAux);
-    void setNomeEstad(string nomeEstadAux);
+    void setCodIng(string codIngAux);
     void setCidade(string cidadeAux);
     void setEstado(string estadoAux);
+    void setCodJogo(string codJogoAux);
+    void setHorario(string horarioAux);
+    void setNomeEstad(string nomeEstadAux);
 };
 
 string cadastroJogo::getCPF(){
@@ -115,6 +116,7 @@ cadastroJogo::cadastroJogo(string cpfAux, string codJogoAux, string nomeAux, str
     setNomeEstad(nomeEstadAux);
     setCidade(cidadeAux);
     setEstado(estadoAux);
+    qtIngressoDisponivel = 250;
 }
 
 #endif // USUARIO_H_INCLUDED
