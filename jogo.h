@@ -6,47 +6,45 @@ using namespace std;
 class cadastroJogo{
 
 public:
-    cadastroJogo(string codJogoAux, string nomeAux, string codIngAux, string data1Aux, string data2Aux, string horario1Aux, string horario2Aux, string preco1Aux, string preco2Aux, string nomeEstadAux, string cidadeAux, string estadoAux);
+    cadastroJogo(string cpfAux, string codJogoAux, string nomeAux, string codIngAux, string dataAux, string horarioAux, string precoAux, string nomeEstadAux, string cidadeAux, string estadoAux);
+    string getCPF();
     string getCodJogo();
     string getNome();
     string getCodIng();
-    string getData1();
-    string getData2();
-    string getHorario1();
-    string getHorario2();
-    string getPreco1();
-    string getPreco2();
+    string getData();
+    string getHorario();
+    string getPreco();
     string getNomeEstad();
     string getCidade();
     string getEstado();
 
 private:
+    string cpf;
     string codJogo;
     string codIng;
     string nome;
-    string data1;
-    string data2;
-    string horario1;
-    string horario2;
-    string preco1;
-    string preco2;
+    string data;
+    string horario;
+    string preco;
     string nomeEstad;
     string cidade;
     string estado;
-    void setCodJogo(string codJogo);
-    void setNome(string nome);
-    void setCodIng(string codIng);
-    void setData1(string data1);
-    void setData2(string data2);
-    void setHorario1(string horario1);
-    void setHorario2(string horario2);
-    void setPreco1(string preco1);
-    void setPreco2(string preco2);
-    void setNomeEstad(string nomeEstad);
-    void setCidade(string cidade);
-    void setEstado(string estado);
+
+    void setCPF(string cpfAux);
+    void setCodJogo(string codJogoAux);
+    void setNome(string nomeAux);
+    void setCodIng(string codIngAux);
+    void setData(string dataAux);
+    void setHorario(string horarioAux);
+    void setPreco(string precoAux);
+    void setNomeEstad(string nomeEstadAux);
+    void setCidade(string cidadeAux);
+    void setEstado(string estadoAux);
 };
 
+string cadastroJogo::getCPF(){
+    return cpf;
+}
 string cadastroJogo::getCodJogo(){
     return codJogo;
 }
@@ -56,23 +54,14 @@ string cadastroJogo::getCodIng(){
 string cadastroJogo::getNome(){
     return nome;
 }
-string cadastroJogo::getData1(){
-    return data1;
+string cadastroJogo::getData(){
+    return data;
 }
-string cadastroJogo::getData2(){
-    return data2;
+string cadastroJogo::getHorario(){
+    return horario;
 }
-string cadastroJogo::getHorario1(){
-    return horario1;
-}
-string cadastroJogo::getHorario2(){
-    return horario2;
-}
-string cadastroJogo::getPreco1(){
-    return preco1;
-}
-string cadastroJogo::getPreco2(){
-    return preco2;
+string cadastroJogo::getPreco(){
+    return preco;
 }
 string cadastroJogo::getNomeEstad(){
     return nomeEstad;
@@ -84,6 +73,9 @@ string cadastroJogo::getEstado(){
     return estado;
 }
 
+void cadastroJogo::setCPF(string cpfAux){
+    cpf = cpfAux;
+}
 void cadastroJogo::setCodJogo(string codJogoAux){
     codJogo = codJogoAux;
 }
@@ -93,23 +85,14 @@ void cadastroJogo::setCodIng(string codIngAux){
 void cadastroJogo::setNome(string nomeAux){
     nome = nomeAux;
 }
-void cadastroJogo::setData1(string data1Aux){
-    data1 = data1Aux;
+void cadastroJogo::setData(string dataAux){
+    data = dataAux;
 }
-void cadastroJogo::setData2(string data2Aux){
-    data2 = data2Aux;
+void cadastroJogo::setHorario(string horarioAux){
+    horario = horarioAux;
 }
-void cadastroJogo::setHorario1(string horario1Aux){
-    horario1 = horario1Aux;
-}
-void cadastroJogo::setHorario2(string horario2Aux){
-    horario2 = horario2Aux;
-}
-void cadastroJogo::setPreco1(string preco1Aux){
-    preco1 = preco1Aux;
-}
-void cadastroJogo::setPreco2(string preco2Aux){
-    preco2 = preco2Aux;
+void cadastroJogo::setPreco(string precoAux){
+    preco = precoAux;
 }
 void cadastroJogo::setNomeEstad(string NomeEstadAux){
     nomeEstad = NomeEstadAux;
@@ -121,20 +104,17 @@ void cadastroJogo::setEstado(string estadoAux){
     estado = estadoAux;
 }
 
-cadastroJogo::cadastroJogo(string codJogoAux, string nomeAux, string codIngAux, string data1Aux, string data2Aux, string horario1Aux, string horario2Aux, string preco1Aux, string preco2Aux, string nomeEstadAux, string cidadeAux, string estadoAux){
+cadastroJogo::cadastroJogo(string cpfAux, string codJogoAux, string nomeAux, string codIngAux, string dataAux, string horarioAux, string precoAux, string nomeEstadAux, string cidadeAux, string estadoAux){
+    setCPF(cpfAux);
     setCodJogo(codJogoAux);
     setNome(nomeAux);
     setCodIng(codIngAux);
-    setData1(data1Aux);
-    setData2(data2Aux);
-    setHorario1(horario1Aux);
-    setHorario2(horario2Aux);
-    setPreco1(preco1Aux);
-    setPreco2(preco2Aux);
+    setData(dataAux);
+    setHorario(horarioAux);
+    setPreco(precoAux);
     setNomeEstad(nomeEstadAux);
     setCidade(cidadeAux);
     setEstado(estadoAux);
 }
-
 
 #endif // USUARIO_H_INCLUDED
