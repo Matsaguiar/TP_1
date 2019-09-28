@@ -138,19 +138,16 @@ int main(){
 
                 if(operacao == 2){
                     system(CLEAR);
+                    cout << endl << "                           #################################" << endl;
+                    cout << "                           ##    Descadastro de Usuario   ##" << endl;
+                    cout << "                           #################################" << endl << endl;
+
                     if(usuarios.size() < 1){
-                        system(CLEAR);
-                        cout << endl << "                           #################################" << endl;
-                        cout << "                           ##    Descadastro de Usuario   ##" << endl;
-                        cout << "                           #################################" << endl << endl;
                         cout << endl << "\tNao ha usuarios cadastrados!" << endl << endl << "Aperte <ENTER> para continuar!";
                         getchar();
                         getchar();
                     }else{
                         ok = 0;
-                        cout << endl << "                           #################################" << endl;
-                        cout << "                           ##    Descadastro de Usuario   ##" << endl;
-                        cout << "                           #################################" << endl << endl;
                         cout << "Digite seu CPF cadastrado: ";
                         cin >> cpfAux;
                         for(i = 0; i < usuarios.size(); i++){
@@ -184,13 +181,13 @@ int main(){
                     cout << endl << "                           #################################" << endl;
                     cout << "                           ##     Compra de Ingressos     ##" << endl;
                     cout << "                           #################################" << endl << endl;
-                    cout << "Digite seu CPF cadastrado................................: ";
+                    cout << "Digite seu CPF cadastrado........................: ";
                     cin >> cpfAux;
                     ok = 0;
                     for(i = 0; i < usuarios.size(); i++){
                         if (cpfAux == usuarios[i].getCPF()){
                             ok = 1;
-                            cout << "Digite sua senha.........................................: ";
+                            cout << "Digite sua senha.................................: ";
                             cin >> senhaAux;
                             if(senhaAux != usuarios[i].getSenha()){
                                 cout << endl << "\tErro! Senha incorreta! Nao foi possivel fazer login!" << endl << endl << "Aperte <ENTER> para continuar!";
@@ -199,7 +196,7 @@ int main(){
                                 break;
                             }
                             int qtIngresso;
-                            cout << "Insira o codigo do jogo que se deseja o ingresso.........: ";
+                            cout << "Insira o codigo do jogo que se deseja o ingresso.: ";
                             cin >> codJogoAux;
                             cout << "Informe a quantidade ingressos que deseja comprar: ";
                             cin >> qtIngresso;
@@ -208,20 +205,14 @@ int main(){
                                 getchar();
                                 getchar();
                             }else{
-                                cout << endl << "\tIngresso comprados com sucesso!" << endl << endl << "Aperte <ENTER> para continuar!";
+                                cout << endl << "\tIngresso comprado com sucesso!" << endl << endl << "Aperte <ENTER> para continuar!";
                                 getchar();
                                 getchar();
                             }
                             break;
                         }
                     }
-                    if(ok == 0){
-                        cout << endl << "\tErro! CPF nao cadastrado! Cadastre seu CPF antes de comprar ingresso!" << endl << endl << "Aperte <ENTER> para continuar!";
-                        getchar();
-                        getchar();
-                    }
-
-                    if(usuarios.size() < 1){
+                    if(ok == 0 || usuarios.size() < 1){
                         cout << endl << "\tErro! CPF nao cadastrado! Cadastre seu CPF antes de comprar ingresso!" << endl << endl << "Aperte <ENTER> para continuar!";
                         getchar();
                         getchar();
@@ -370,13 +361,13 @@ int main(){
                 if(operacao == 3){
                     system(CLEAR);
                     for(i = 0; i < jogos.size(); i++){
-                        cout << "CPF de cadastr.....: " << jogos[i].getCPF() << endl;
+                        cout << "CPF de cadastro....: " << jogos[i].getCPF() << endl;
                         cout << "Codigo do jogo.....: " << jogos[i].getCodJogo() << endl;
                         cout << "Nome do jogo.......: " << jogos[i].getNome() << endl;
                         cout << "Codigo do ingresso.: " << jogos[i].getCodIng() << endl;
                         cout << "Data da partida....: " << jogos[i].getData() << endl;
                         cout << "Horario da partida.: " << jogos[i].getHorario() << endl;
-                        cout << "Preco da df partida: " << jogos[i].getPreco() << endl;
+                        cout << "Preco da da partida: " << jogos[i].getPreco() << endl;
                         cout << "Nome do estadio....: " << jogos[i].getNomeEstad() << endl;
                         cout << "Cidade.............: " << jogos[i].getCidade() << endl;
                         cout << "Estado.............: " << jogos[i].getEstado() << endl;
