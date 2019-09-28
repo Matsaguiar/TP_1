@@ -12,6 +12,7 @@ public:
     string getNumCartao();
     string getCodSegCartao();
     string getDataValCartao();
+    int qtCadIng;
 
 private:
     string cpf;
@@ -19,6 +20,7 @@ private:
     string numCartao;
     string codSegCartao;
     string dataValCartao;
+
     void setCPF(string cpfAux);
     void setSenha(string senhaAux);
     void setNumCartao(string numCartaoAux);
@@ -65,6 +67,5 @@ cadastroUsuario::cadastroUsuario(string cpfAux, string senhaAux, string numCarta
     setCodSegCartao(codSegCartaoAux);
     setDataValCartao(dataValCartaoAux);
 }
-
 
 #endif // USUARIO_H_INCLUDED
