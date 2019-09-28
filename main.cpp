@@ -20,7 +20,7 @@ int main(){
     vector <cadastroUsuario> usuarios;
     vector <cadastroJogo> jogos;
 
-    int operacao, i, ok, aceito=0;
+    int operacao, i, ok, aceito;
     int qtCadIngAux;
     string cpfAux;
     string senhaAux;
@@ -87,6 +87,7 @@ int main(){
                             break;
                         }
                     }
+                    aceito = 0;
                     if(ok == 0){
                         cout << "Informe a senha............................: ";
                         cin >> senhaAux;
@@ -109,6 +110,7 @@ int main(){
                         if(codSegCartaoAux.size() == 3)
                             aceito++;
                         aceito = 4;
+
                         if(aceito == 4){
                             cadastroUsuario user(cpfAux, senhaAux, numCartaoAux, codSegCartaoAux, dataValCartaoAux);
                             usuarios.push_back(user);
@@ -144,8 +146,6 @@ int main(){
 
                     if(usuarios.size() < 1){
                         cout << endl << "\tNao ha usuarios cadastrados!" << endl << endl << "Aperte <ENTER> para continuar!";
-                        getchar();
-                        getchar();
                     }else{
                         ok = 0;
                         cout << "Digite seu CPF cadastrado: ";
@@ -155,25 +155,22 @@ int main(){
                                 ok = 1;
                                 cout << "Digite sua senha.........: ";
                                 cin >> senhaAux;
+
                                 if(senhaAux != usuarios[i].getSenha()){
                                     cout << endl << "\tSenha incorreta! Nao foi possivel descadastrar usuario!" << endl << endl << "Aperte <ENTER> para continuar!";
-                                    getchar();
-                                    getchar();
                                     break;
                                 }else{
                                     usuarios.erase(usuarios.begin()+i);
                                     cout << endl << "\tUsuario descadastrado com sucesso!" << endl << endl << "Aperte <ENTER> para continuar!";
-                                    getchar();
-                                    getchar();
                                 }
                             }
                         }
                         if(ok == 0){
-                            cout << endl << "\tErro! CPF nao cadastrado! Cadastre seu CPF antes de comprar ingresso!" << endl << endl << "Aperte <ENTER> para continuar!";
-                            getchar();
-                            getchar();
+                            cout << endl << "\tErro! CPF nao cadastrado!" << endl << endl << "Aperte <ENTER> para continuar!";
                         }
                     }
+                    getchar();
+                    getchar();
                 }
 
                 if(operacao == 3){
@@ -181,42 +178,56 @@ int main(){
                     cout << endl << "                           #################################" << endl;
                     cout << "                           ##     Compra de Ingressos     ##" << endl;
                     cout << "                           #################################" << endl << endl;
-                    cout << "Digite seu CPF cadastrado........................: ";
-                    cin >> cpfAux;
-                    ok = 0;
-                    for(i = 0; i < usuarios.size(); i++){
-                        if (cpfAux == usuarios[i].getCPF()){
-                            ok = 1;
-                            cout << "Digite sua senha.................................: ";
-                            cin >> senhaAux;
-                            if(senhaAux != usuarios[i].getSenha()){
-                                cout << endl << "\tErro! Senha incorreta! Nao foi possivel fazer login!" << endl << endl << "Aperte <ENTER> para continuar!";
-                                getchar();
-                                getchar();
-                                break;
+                    if(jogos.size() > 0){
+                        cout << "Para mais detalhes dos ingressos disponiveis, va em 'Informacoes de ingressos a venda'." << endl << endl;
+                        cout << "Digite seu CPF cadastrado........................: ";
+                        cin >> cpfAux;
+                        ok = 0;
+                        int okCod = 0;
+                        for(i = 0; i < usuarios.size(); i++){ /* i eh o contador do vector usuarios*/
+                            if (cpfAux == usuarios[i].getCPF()){
+                                ok = 1;
+                                cout << "Digite sua senha.................................: ";
+                                cin >> senhaAux;
+                                if(senhaAux != usuarios[i].getSenha()){
+                                    cout << endl << "\tErro! Senha incorreta! Nao foi possivel fazer login!" << endl << endl << "Aperte <ENTER> para continuar!";
+                                    break;
+                                }else{                    /*Senha correta!*/
+                                    int qtIngresso, j;
+                                    cout << "Insira o codigo do jogo que se deseja o ingresso.: ";
+                                    cin >> codJogoAux;
+                                    for(j = 0; j < jogos.size(); j++){ /* j eh o contador do vector jogos*/
+                                        if(codJogoAux == jogos[j].getCodJogo()){ /*Verifica o codigo do jogo*/
+                                            okCod = 1;
+                                            cout << endl << "Quantidade de ingressos disponveis para esse jogo: " << jogos[j].qtIngressoDisponivel << endl << endl;
+                                            if(jogos[j].qtIngressoDisponivel < 1){
+                                                cout << endl << "Estao esgotados os ingressos para esse jogo!" << endl << endl << "Aperte <ENTER> para continuar!";
+                                                break;
+                                            }
+                                            cout << "Informe a quantidade ingressos que deseja comprar: ";
+                                            cin >> qtIngresso;
+                                            if(qtIngresso < 1 || jogos[j].qtIngressoDisponivel < qtIngresso){
+                                                cout << endl << "\tErro na quantidade de ingresso! Operacao cancelada!" << endl << endl << "Aperte <ENTER> para continuar!";
+                                            }else{
+                                                cout << endl << "\tIngresso comprado com sucesso!" << endl << endl << "Aperte <ENTER> para continuar!";
+                                                jogos[j].qtIngressoDisponivel -=qtIngresso;
+                                            }
+                                            break;
+                                        }
+                                    }
+                                    if (okCod == 0)
+                                        cout << endl << "\tNao ha jogo cadastrado com esse codigo!" << endl << endl << "Aperte <ENTER> para continuar!";
+                                }
                             }
-                            int qtIngresso;
-                            cout << "Insira o codigo do jogo que se deseja o ingresso.: ";
-                            cin >> codJogoAux;
-                            cout << "Informe a quantidade ingressos que deseja comprar: ";
-                            cin >> qtIngresso;
-                            if(qtIngresso < 1){
-                                cout << endl << "\tErro na quantidade de ingresso! Operacao cancelada!" << endl << endl << "Aperte <ENTER> para continuar!";
-                                getchar();
-                                getchar();
-                            }else{
-                                cout << endl << "\tIngresso comprado com sucesso!" << endl << endl << "Aperte <ENTER> para continuar!";
-                                getchar();
-                                getchar();
-                            }
-                            break;
                         }
-                    }
-                    if(ok == 0 || usuarios.size() < 1){
-                        cout << endl << "\tErro! CPF nao cadastrado! Cadastre seu CPF antes de comprar ingresso!" << endl << endl << "Aperte <ENTER> para continuar!";
-                        getchar();
-                        getchar();
-                    }
+                        if(ok == 0 || usuarios.size() < 1)
+                            cout << endl << "\tErro! CPF nao cadastrado! Cadastre seu CPF antes de comprar ingresso!" << endl << endl << "Aperte <ENTER> para continuar!";
+
+                    }else
+                        cout << endl << "\tNao ha jogo cadastrado ate o momento!" << endl << endl << "Aperte <ENTER> para continuar!";
+
+                    getchar();
+                    getchar();
                 }
 
             }while(operacao != 0 && operacao != -1);
@@ -232,8 +243,7 @@ int main(){
                 cout << "                           #################################" << endl << endl;
                 cout << "    (1)  - Cadastrar jogo" << endl;
                 cout << "    (2)  - Descadastrar jogo" << endl;
-                cout << "    (3)  - Informacoes de jogos" << endl;
-                cout << "    (4)  - Informacao de venda de um jogo" << endl;
+                cout << "    (3)  - Informacao de venda de um jogo" << endl;
                 cout << "    (0)  - Voltar para o menu" << endl << endl;
                 cout << "   (-1)  - Sair do programa" << endl << endl;
                 cout << "Digite uma opcao: ";
@@ -277,7 +287,7 @@ int main(){
                             cin >> dataAux;
                             cout << "Informe o horario da partida: ";
                             cin >> horarioAux;
-                            cout << "Informe o preco da partida..: ";
+                            cout << "Informe o preco do ingresso.: ";
                             cin >> precoAux;
                             cout << "Informe o nome do estadio...: ";
                             cin >> nomeEstadAux;
@@ -359,27 +369,6 @@ int main(){
                 }
 
                 if(operacao == 3){
-                    system(CLEAR);
-                    for(i = 0; i < jogos.size(); i++){
-                        cout << "CPF de cadastro....: " << jogos[i].getCPF() << endl;
-                        cout << "Codigo do jogo.....: " << jogos[i].getCodJogo() << endl;
-                        cout << "Nome do jogo.......: " << jogos[i].getNome() << endl;
-                        cout << "Codigo do ingresso.: " << jogos[i].getCodIng() << endl;
-                        cout << "Data da partida....: " << jogos[i].getData() << endl;
-                        cout << "Horario da partida.: " << jogos[i].getHorario() << endl;
-                        cout << "Preco da da partida: " << jogos[i].getPreco() << endl;
-                        cout << "Nome do estadio....: " << jogos[i].getNomeEstad() << endl;
-                        cout << "Cidade.............: " << jogos[i].getCidade() << endl;
-                        cout << "Estado.............: " << jogos[i].getEstado() << endl;
-                        cout << "=======================================================" << endl;
-                    }
-                    cout << endl << "Aperte <ENTER> para continuar!";
-                    getchar();
-                    getchar();
-                    system(CLEAR);
-                }
-
-                if(operacao == 4){
 
                 }
 
@@ -387,8 +376,33 @@ int main(){
         }
 
         if(operacao == 3){
+            system(CLEAR);
 
+            cout << endl << "                           ###########################################" << endl;
+            cout << "                           ##    Informacoes de ingressos a venda   ##" << endl;
+            cout << "                           ###########################################" << endl << endl << endl;
+
+            if(jogos.size() > 0){
+                for(i = 0; i < jogos.size(); i++){
+                    cout << "Codigo do jogo.....................: " << jogos[i].getCodJogo() << endl;
+                    cout << "Nome do jogo.......................: " << jogos[i].getNome() << endl;
+                    cout << "Data da partida....................: " << jogos[i].getData() << endl;
+                    cout << "Horario da partida.................: " << jogos[i].getHorario() << endl;
+                    cout << "Preco do ingresso..................: " << jogos[i].getPreco() << endl;
+                    cout << "Nome do estadio....................: " << jogos[i].getNomeEstad() << endl;
+                    cout << "Cidade.............................: " << jogos[i].getCidade() << endl;
+                    cout << "Estado.............................: " << jogos[i].getEstado() << endl;
+                    cout << "Quantidade de ingressos disponiveis: " << jogos[i].qtIngressoDisponivel << endl;
+                    cout << "=========================================================" << endl;
+                }
+            }else
+                cout << endl << "\tNao ha ingressos disponiveis no momento!" << endl << endl;
+
+            cout << endl << "Aperte <ENTER> para continuar!";
+            getchar();
+            getchar();
         }
+
     }while(operacao != -1);
 
     return 0;
