@@ -19,6 +19,7 @@ int main(){
 
     vector <cadastroUsuario> usuarios;
     vector <cadastroJogo> jogos;
+    //vector <string> cpfCompraIngresso;
 
     int operacao, i, ok, aceito;
     int qtCadIngAux;
@@ -36,6 +37,7 @@ int main(){
     string nomeEstadAux;
     string cidadeAux;
     string estadoAux;
+    string cpfMaisCodigo;
 
     do{
         system(CLEAR);
@@ -219,6 +221,18 @@ int main(){
                                             }else{
                                                 cout << endl << "\tIngresso comprado com sucesso!" << endl << endl << "Aperte <ENTER> para continuar!";
                                                 jogos[j].qtIngressoDisponivel -=qtIngresso;
+
+                                                int k, l;
+                                                for(k = 0; k < 11; k++){
+                                                    jogos[j].compraCpfIngresso.push_back(cpfAux[k]);
+                                                }
+                                                l = jogos[j].compraCpfIngresso.size();
+                                                cout << endl;
+                                                for(k = 1; k <= l; k++){
+                                                    cout << jogos[j].compraCpfIngresso[k-1];
+                                                    if(k%11 == 0 && k > 0)
+                                                        cout << endl;
+                                                }
                                             }
                                             break;
                                         }
