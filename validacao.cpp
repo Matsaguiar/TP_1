@@ -22,6 +22,24 @@ int numero (char a) { //função para descobrir se é número
 int caracterEstranho (char a) { //função para determinar se existe um caracter estranho, como espaço ou pontuação.
 	return (a>='A' && a<'Z') || (a>='a' && a<='z') || (a>='0' && a<='9');
 }
+/*#######################################################################################################################################################
+#########################################################################################################################################################*/
+int codSeg(string codSegCartaoAux, int tamanho){
+    int validade = 0, i;
+    if(tamanho == 3)
+        validade+=1;
+    else
+        return 0;
+    for (i = 0; i < tamanho; i++) {
+		if (numero(codSegCartaoAux[i]) == 1){
+			validade+=1;
+		}
+	}
+	if(validade == 4)
+        return 1;
+    else
+        return 0;
+}
 
 /*#######################################################################################################################################################
 #########################################################################################################################################################*/
@@ -58,10 +76,19 @@ int senha(string senhaAux, int tamanho){
 			break;
 		}
 	}
+	//Se a senha tiver caracter repetido
+	for (i = 0; i < (tamanho - 1); i++) {
+        int j;
+        for(j = (i+1); j < tamanho; j++){
+            if (senhaAux[i] == senhaAux[j])
+                return 0;
+        }
+	}
   	//Se a senha tiver 6 caracteres, a validade aumenta uma unidade
 	if (tamanho == 6){
 		validade+=1;
-	}
+	}else
+        return 0;
 
   	//caso o somatório da validade resulte em 5, atendeu todos os critérios e pode ser considerada com senha valida, senão será considerada senha invalida
 	if (validade == 5){
@@ -73,9 +100,48 @@ int senha(string senhaAux, int tamanho){
 	}
 }
 /*######################################################################################################################################################
-########################################################################################################################################################
-########################################################################################################################################################
-########################################################################################################################################################
+######################################################################################################################################################*/
+int dataValCar(string dataValCartaoAux, int tamanho){
+    int validade = 0, i;
+
+    if(tamanho == 5){
+        validade++;
+    }else
+        return 0;
+
+    if(dataValCartaoAux[0] == '0'){
+        if(dataValCartaoAux[1] >= '1' && dataValCartaoAux[1] <= '9')
+            validade++;
+        else
+            return 0;
+    }else if(dataValCartaoAux[0] == '1'){
+        if(dataValCartaoAux[1] >= '0' && dataValCartaoAux[1] <= '2')
+            validade++;
+        else
+            return 0;
+    }else
+        return 0;
+
+    if(dataValCartaoAux[2] == '/')
+        validade++;
+    else
+        return 0;
+
+    if(dataValCartaoAux[3] >='0' && dataValCartaoAux[3]<='9')
+        validade++;
+    else
+        return 0;
+
+    if(dataValCartaoAux[4]>='0' && dataValCartaoAux[4]<='9')
+        validade++;
+    else
+        return 0;
+
+    return 1;
+
+}
+
+/*######################################################################################################################################################
 ######################################################################################################################################################*/
 #include <bits/stdc++.h>
 
@@ -114,11 +180,9 @@ int cartao(string cardNo){
 }
 
 /*##################################################################################################################################################
-####################################################################################################################################################
 ##################################################################################################################################################*/
 
-inline bool validaCPF(const int * const cpf)
-{
+inline bool validaCPF(const int * const cpf){
     int digito1, digito2, temp = 0;
 
     for(char i = 0; i < 9; i++)
@@ -174,5 +238,3 @@ int verificaCPF(string cpfAux){
         return 0;
     }
 }
-
-
