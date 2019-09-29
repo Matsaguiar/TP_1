@@ -74,30 +74,28 @@ int main(){
                     cout << "                           ##     Cadastro de Usuario     ##" << endl;
                     cout << "                           #################################" << endl << endl;
                     cout << "Informe seu CPF sem pontos, espacos ou tracos!" << endl << "Informe sua senha (com 6 caracteres) que DEVE conter pelo menos 1 letra maiscula, 1 letra minuscula e 1 numero!" << endl;
-                    cout << "Informe os numeros do seu cartao de credito sem pontos!" << endl << "Informe a data de validade do cartao no formato: MM/AA" << endl << endl;
-                    cout << "Informe seu CPF............................: ";
+                    cout << "Informe os numeros do seu cartao de credito sem pontos!" << endl << "Informe os 3 numeros do codigo de seguranca!" << endl << "Informe a data de validade do cartao no formato: MM/AA" << endl << endl;
+                    cout << "Informe seu CPF.......................................: ";
                     cin >> cpfAux;
                     ok = 0;
                     for(i = 0; i < usuarios.size(); i++){
                         if (cpfAux == usuarios[i].getCPF()){
                             ok = 1;
                             cout << endl << "\tCPF ja cadastrado!"<< endl << endl << "Aperte <ENTER> para continuar!";
-                            getchar();
-                            getchar();
                             break;
                         }
                     }
                     aceito = 0;
                     if(ok == 0){
-                        cout << "Informe a senha............................: ";
+                        cout << "Informe a senha.......................................: ";
                         cin >> senhaAux;
-                        cout << "Informe os numeros do seu cartao de credito: ";
+                        cout << "Informe os numeros do seu cartao de credito...........: ";
                         cin >> numCartaoAux;
-                        cout << "Informe o codigo de segurança..............: ";
+                        cout << "Informe o codigo de segurança do seu cartao de credito: ";
                         cin >> codSegCartaoAux;
-                        cout << "Informe a validade do seu cartao de credito: ";
+                        cout << "Informe a validade do seu cartao de credito...........: ";
                         cin >> dataValCartaoAux;
-
+                        //5234 2143 6620 8316
                         if(verificaCPF(cpfAux) == 1)
                             aceito++;
 
@@ -107,11 +105,15 @@ int main(){
                         if(cartao(numCartaoAux) == 1)
                             aceito++;
 
-                        if(codSegCartaoAux.size() == 3)
+                        if( codSeg(codSegCartaoAux, (codSegCartaoAux.size())) == 1)
                             aceito++;
-                        aceito = 4;
 
-                        if(aceito == 4){
+                        if(dataValCar(dataValCartaoAux, dataValCartaoAux.size()) == 1)
+                            aceito++;
+
+                        aceito = 5;
+
+                        if(aceito == 5){
                             cadastroUsuario user(cpfAux, senhaAux, numCartaoAux, codSegCartaoAux, dataValCartaoAux);
                             usuarios.push_back(user);
                             (usuarios.back()).qtCadIng = 0;
@@ -128,14 +130,17 @@ int main(){
                             if(cartao(numCartaoAux) == 0)
                                 cout << "Numero do cartao de credito invalido!" << endl;
 
-                            if(codSegCartaoAux.size() != 3)
+                            if(codSeg(codSegCartaoAux, (codSegCartaoAux.size())) == 0)
                                 cout << "Codigo de seguranca fora do formato padrao!" << endl;
+
+                            if(dataValCar(dataValCartaoAux, dataValCartaoAux.size()) == 0)
+                                cout << "Data de validade do cartao invalido ou fora do formato padrao!" << endl;
 
                             cout << endl << "\tTente novamente" << endl << endl << "Aperte <ENTER> para continuar!";
                         }
-                        getchar();
-                        getchar();
                     }
+                    getchar();
+                    getchar();
                 }
 
                 if(operacao == 2){
@@ -158,6 +163,9 @@ int main(){
 
                                 if(senhaAux != usuarios[i].getSenha()){
                                     cout << endl << "\tSenha incorreta! Nao foi possivel descadastrar usuario!" << endl << endl << "Aperte <ENTER> para continuar!";
+                                    break;
+                                }else if(usuarios[i].qtCadIng != 0){
+                                    cout << endl << "\tNao foi possivel descadastrar usuario, visto que ha um jogo cadastrado nesse CPF" << endl << endl << "Aperte <ENTER> para continuar!";
                                     break;
                                 }else{
                                     usuarios.erase(usuarios.begin()+i);
@@ -244,6 +252,7 @@ int main(){
                 cout << "    (1)  - Cadastrar jogo" << endl;
                 cout << "    (2)  - Descadastrar jogo" << endl;
                 cout << "    (3)  - Informacao de venda de um jogo" << endl;
+                cout << "    (4)  - Alterar um jogo" << endl;
                 cout << "    (0)  - Voltar para o menu" << endl << endl;
                 cout << "   (-1)  - Sair do programa" << endl << endl;
                 cout << "Digite uma opcao: ";
@@ -265,16 +274,12 @@ int main(){
                             ok = 1;
                             if(usuarios[i].qtCadIng >= 5){
                                 cout << endl << "\tEsse CPF ja atingiu a capacidade maxima de cadastrar jogo!" << endl << endl << "Aperte <ENTER> para continuar!";
-                                getchar();
-                                getchar();
                                 break;
                             }
                             cout << "Digite sua senha............: ";
                             cin >> senhaAux;
                             if(senhaAux != usuarios[i].getSenha()){
                                 cout << endl << "\tErro! Senha incorreta! Nao foi possivel fazer login!" << endl << endl << "Aperte <ENTER> para continuar!";
-                                getchar();
-                                getchar();
                                 break;
                             }
                             cout << "Informe o codigo do jogo....: ";
@@ -301,15 +306,13 @@ int main(){
                             qtCadIngAux+=1;
                             usuarios[i].qtCadIng = qtCadIngAux;
                             cout << endl << "\tJogo cadastrado com sucesso!" << endl << endl << "Aperte <ENTER> para continuar!";
-                            getchar();
-                            getchar();
                         }
                     }
                     if(ok == 0 || usuarios.size() < 1){
                         cout << endl << "\tErro! CPF nao cadastrado! Cadastre seu CPF antes de cadastrar jogo!" << endl << endl << "Aperte <ENTER> para continuar!";
-                        getchar();
-                        getchar();
                     }
+                    getchar();
+                    getchar();
                 }
 
                 if(operacao == 2){
@@ -329,47 +332,142 @@ int main(){
                             cin >> senhaAux;
                             if(senhaAux != usuarios[i].getSenha()){
                                 cout << endl << "\tErro! Senha incorreta! Nao foi possivel fazer login!" << endl << endl << "Aperte <ENTER> para continuar!";
-                                getchar();
-                                getchar();
                                 break;
                             }else{
-                                int j, k = 0;
+                                int j, k = 0, ok1 = 0;
                                 for(j = 0; j < jogos.size(); j++){
                                     if(jogos[j].getCPF() == cpfAux){
-                                        cout << endl << "Jogo..............: " << k+1 << endl << endl;
-                                        cout << "Codigo do jogo....: " << jogos[j].getCodJogo() << endl;
-                                        cout << "Nome do jogo......: " << jogos[j].getNome() << endl;
-                                        cout << "Data da partida...: " << jogos[j].getData() << endl;
-                                        cout << "Horario da partida: " << jogos[j].getHorario() << endl;
-                                        cout << "Estadio da partida: " << jogos[j].getEstado() << endl;
+                                        ok1 = 1;
+                                        cout << endl << "Jogo...............................: " << k+1 << endl << endl;
+                                        cout << "Codigo do jogo.....................: " << jogos[j].getCodJogo() << endl;
+                                        cout << "Nome do jogo.......................: " << jogos[j].getNome() << endl;
+                                        cout << "Data da partida....................: " << jogos[j].getData() << endl;
+                                        cout << "Horario da partida.................: " << jogos[j].getHorario() << endl;
+                                        cout << "Estadio da partida.................: " << jogos[j].getEstado() << endl;
+                                        cout << "Quantidade de ingressos disponiveis: " << jogos[j].qtIngressoDisponivel << endl;
                                         cout << "=======================================================" << endl << endl;
                                         k++;
                                     }
                                 }
+                                if(ok1 == 0){
+                                    cout << endl << "\tErro! Esse CPF nao cadastrou nenhum jogo!" << endl << endl << "Aperte <ENTER> para continuar!";
+                                    break;
+                                }
                                 cout << "Digite o codigo do jogo que deseja descadastrar: ";
                                 cin >> codJogoAux;
+                                int ok2 = 0;
                                 for(j = 0; j < jogos.size(); j++){
                                     if(jogos[j].getCodJogo() == codJogoAux){
-                                        jogos.erase(jogos.begin()+j);
-                                        break;
+                                        ok2 = 1;
+                                        if(jogos[j].qtIngressoDisponivel == 250){
+                                            jogos.erase(jogos.begin()+j);
+                                            qtCadIngAux = usuarios[i].qtCadIng;
+                                            qtCadIngAux-=1;
+                                            usuarios[i].qtCadIng = qtCadIngAux;
+                                            cout << endl << "\tJogo descadastrado com sucesso!" << endl << endl << "Aperte <ENTER> para continuar!";
+                                            break;
+                                        }else
+                                            cout << "\tErro! Nao foi possivel descadastrar esse jogo, pois ja houve venda de ingresso!" << endl << endl << "Aperte <ENTER> para continuar!";
                                     }
                                 }
-                                cout << endl << "\tJogo descadastrado com sucesso!" << endl << endl << "Aperte <ENTER> para continuar!";
-                                getchar();
-                                getchar();
+                                if(ok2 == 0){
+                                    cout << "\tCodigo invalido!" << endl << endl << "Aperte <ENTER> para continuar!";
+                                    break;
+                                }
                             }
                         }
                     }
-                    if(ok == 0 || usuarios.size() < 1){
-                        cout << endl << "\tErro! Esse CPF nao cadastrou nenhum jogo!" << endl << endl << "Aperte <ENTER> para continuar!";
-                        getchar();
-                        getchar();
-                    }
+                    if(ok == 0 || usuarios.size() < 1)
+                        cout << endl << "\tErro! CPF nao cadastrado!" << endl << endl << "Aperte <ENTER> para continuar!";
 
+                    getchar();
+                    getchar();
                 }
 
                 if(operacao == 3){
 
+                }
+
+                if(operacao == 4){
+                    system(CLEAR);
+                    cout << endl << "                           #################################" << endl;
+                    cout << "                           ##      Alteracao de Jogo      ##" << endl;
+                    cout << "                           #################################" << endl << endl;
+                    cout << "Para alterar um jogo, eh necessario usar o mesmo CPF que foi cadastrado e nenhum ingresso pode ter vendido!" << endl << endl;
+                    cout << "Digite seu CPF....: ";
+                    cin >> cpfAux;
+                    ok = 0;
+                    for(i = 0; i < usuarios.size(); i++){
+                        if (cpfAux == usuarios[i].getCPF()){
+                            ok = 1;
+                            cout << "Digite sua senha..: ";
+                            cin >> senhaAux;
+                            if(senhaAux != usuarios[i].getSenha()){
+                                cout << endl << "\tErro! Senha incorreta! Nao foi possivel fazer login!" << endl << endl << "Aperte <ENTER> para continuar!";
+                                break;
+                            }else{
+                                int j, k = 0, ok1 = 0;
+                                for(j = 0; j < jogos.size(); j++){
+                                    if(jogos[j].getCPF() == cpfAux){
+                                        ok1 = 1;
+                                        cout << endl << "Codigo do jogo.....................: " << jogos[j].getCodJogo() << endl;
+                                        cout << "Nome do jogo.......................: " << jogos[j].getNome() << endl;
+                                        cout << "Data da partida....................: " << jogos[j].getData() << endl;
+                                        cout << "Horario da partida.................: " << jogos[j].getHorario() << endl;
+                                        cout << "Estadio da partida.................: " << jogos[j].getEstado() << endl;
+                                        cout << "Quantidade de ingressos disponiveis: " << jogos[j].qtIngressoDisponivel << endl;
+                                        cout << "=======================================================" << endl << endl;
+                                        k++;
+                                    }
+                                }
+                                if(ok1 == 0){
+                                    cout << endl << "\tErro! Esse CPF nao cadastrou nenhum jogo!" << endl << endl << "Aperte <ENTER> para continuar!";
+                                    break;
+                                }
+                                cout << "Digite o codigo do jogo que deseja alterar: ";
+                                cin >> codJogoAux;
+                                int ok2 = 0;
+                                for(j = 0; j < jogos.size(); j++){
+                                    if(jogos[j].getCodJogo() == codJogoAux){
+                                        ok2 = 1;
+                                        if(jogos[j].qtIngressoDisponivel == 250){
+                                            cout << "Informe o novo nome do jogo......: ";
+                                            cin >> nomeAux;
+                                            cout << "Informe o novo codigo do ingresso: ";
+                                            cin >> codIngAux;
+                                            cout << "Informe a nova data da partida...: ";
+                                            cin >> dataAux;
+                                            cout << "Informe o novo horario da partida: ";
+                                            cin >> horarioAux;
+                                            cout << "Informe o novo preco do ingresso.: ";
+                                            cin >> precoAux;
+                                            cout << "Informe o novo nome do estadio...: ";
+                                            cin >> nomeEstadAux;
+                                            cout << "Informe a nova cidade............: ";
+                                            cin >> cidadeAux;
+                                            cout << "Informe o novo estado............: ";
+                                            cin >> estadoAux;
+                                            cadastroJogo jogo(cpfAux, codJogoAux, nomeAux, codIngAux, dataAux, horarioAux, precoAux, nomeEstadAux, cidadeAux, estadoAux);
+                                            jogos.insert(jogos.begin()+j, jogo);
+                                            jogos.erase(jogos.begin()+j+1);
+                                            cout << endl << "\tJogo alterado com sucesso!" << endl << endl << "Aperte <ENTER> para continuar!";
+                                            break;
+                                        }else
+                                            cout << "\tErro! Nao foi possivel alterar esse jogo, pois ja houve venda de ingresso!" << endl << endl << "Aperte <ENTER> para continuar!";
+                                    }
+                                }
+                                if(ok2 == 0){
+                                    cout << "\tCodigo invalido!" << endl << endl << "Aperte <ENTER> para continuar!";
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    if(ok == 0 || usuarios.size() < 1){
+                        cout << endl << "\tErro! CPF nao cadastrado!" << endl << endl << "Aperte <ENTER> para continuar!";
+                    }
+                    getchar();
+                    getchar();
                 }
 
             }while(operacao != 0 && operacao != -1);
