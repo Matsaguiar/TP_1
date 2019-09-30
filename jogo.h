@@ -6,11 +6,11 @@ using namespace std;
 class cadastroJogo{
 
 public:
-    cadastroJogo(string cpfAux, string codJogoAux, string nomeAux, string codIngAux, string dataAux, string horarioAux, string precoAux, string nomeEstadAux, string cidadeAux, string estadoAux);
+    cadastroJogo(string cpfAux, string codJogoAux, string nomeAux, string codIngAux, string dataAux, string horarioAux, float precoAux, string nomeEstadAux, string cidadeAux, string estadoAux);
     string getCPF();
     string getNome();
     string getData();
-    string getPreco();
+    float getPreco();
     string getCodIng();
     string getCidade();
     string getEstado();
@@ -18,12 +18,14 @@ public:
     string getHorario();
     string getNomeEstad();
     int qtIngressoDisponivel;
+    string compraCpfIngresso;
+
 
 private:
     string cpf;
     string nome;
     string data;
-    string preco;
+    float preco;
     string codIng;
     string cidade;
     string estado;
@@ -34,7 +36,7 @@ private:
     void setCPF(string cpfAux);
     void setNome(string nomeAux);
     void setData(string dataAux);
-    void setPreco(string precoAux);
+    void setPreco(float precoAux);
     void setCodIng(string codIngAux);
     void setCidade(string cidadeAux);
     void setEstado(string estadoAux);
@@ -61,7 +63,7 @@ string cadastroJogo::getData(){
 string cadastroJogo::getHorario(){
     return horario;
 }
-string cadastroJogo::getPreco(){
+float cadastroJogo::getPreco(){
     return preco;
 }
 string cadastroJogo::getNomeEstad(){
@@ -92,7 +94,7 @@ void cadastroJogo::setData(string dataAux){
 void cadastroJogo::setHorario(string horarioAux){
     horario = horarioAux;
 }
-void cadastroJogo::setPreco(string precoAux){
+void cadastroJogo::setPreco(float precoAux){
     preco = precoAux;
 }
 void cadastroJogo::setNomeEstad(string NomeEstadAux){
@@ -105,7 +107,7 @@ void cadastroJogo::setEstado(string estadoAux){
     estado = estadoAux;
 }
 
-cadastroJogo::cadastroJogo(string cpfAux, string codJogoAux, string nomeAux, string codIngAux, string dataAux, string horarioAux, string precoAux, string nomeEstadAux, string cidadeAux, string estadoAux){
+cadastroJogo::cadastroJogo(string cpfAux, string codJogoAux, string nomeAux, string codIngAux, string dataAux, string horarioAux, float precoAux, string nomeEstadAux, string cidadeAux, string estadoAux){
     setCPF(cpfAux);
     setCodJogo(codJogoAux);
     setNome(nomeAux);
