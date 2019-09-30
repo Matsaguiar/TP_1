@@ -94,7 +94,7 @@ int main(){
                         cin >> senhaAux;
                         cout << "Informe os numeros do seu cartao de credito...........: ";
                         cin >> numCartaoAux;
-                        cout << "Informe o codigo de segurança do seu cartao de credito: ";
+                        cout << "Informe o codigo de seguranca do seu cartao de credito: ";
                         cin >> codSegCartaoAux;
                         cout << "Informe a validade do seu cartao de credito...........: ";
                         cin >> dataValCartaoAux;
@@ -114,7 +114,6 @@ int main(){
                         if(dataValCar(dataValCartaoAux, dataValCartaoAux.size()) == 1)
                             aceito++;
 
-                        aceito = 5;
 
                         if(aceito == 5){
                             cadastroUsuario user(cpfAux, senhaAux, numCartaoAux, codSegCartaoAux, dataValCartaoAux);
@@ -272,7 +271,9 @@ int main(){
                     cout << endl << "                           #################################" << endl;
                     cout << "                           ##      Cadastro de Jogo       ##" << endl;
                     cout << "                           #################################" << endl << endl;
-                    cout << "OBS.: Cada CPF so pode cadastrar ate 5 jogos." << endl << endl;
+                    cout << "OBS.: Cada CPF so pode cadastrar ate 5 jogos." << endl << "Codigo:  3 numeros" << endl << "Nome: 20 caracteres apenas de numeros, letras e espaco; Obrigatorio contar pelo menos uma letra" << endl;
+                    cout << "Codigo do ingresso: 5 numeros" << endl << "Data: DD/MM/AA; DD deve estar entre 01 e 31; MM entre 01 e 12; AA entre 00 e 99" << endl << "Horario: HH:MM; HH deve estar entre 07 e 22; MM deve ser 00, 15, 30 ou 45" << endl;
+                    cout << "Preco: Deve estar entre 0 e 1000" << endl << "Cidade: 15 caracteres, apenas numeros, letras, espaco e ponto" << endl << "Estado: 2 letras maiusculas" << endl << endl;
                     cout << "Digite seu CPF cadastrado...: ";
                     cin >> cpfAux;
 
@@ -464,7 +465,7 @@ int main(){
                             cout << "Digite sua senha..: " << endl << endl;
                             cin >> senhaAux;
                             if(senhaAux != usuarios[i].getSenha()){
-                                cout << endl << "\tErro! Senha incorreta! Nao foi possivel fazer login!" << endl << endl << "Aperte <ENTER> para continuar!";
+                                cout << endl << "\tErro! Senha incorreta! Nao foi possivel fazer login!" << endl << endl << "Aperte <ENTER> para continuar!" << endl;
                                 getchar();
                                 getchar();
                                 break;
@@ -474,7 +475,7 @@ int main(){
                                     if(jogos[j].getCPF() == cpfAux){
                                         cout << "Codigo do jogo....: " << jogos[j].getCodJogo() << endl;
                                         cout << "Nome do jogo......: " << jogos[j].getNome() << endl;
-                                        cout << "Ingressos vendidos: " << (250 - jogos[j].qtIngressoDisponivel) << end;
+                                        cout << "Ingressos vendidos: " << (250 - jogos[j].qtIngressoDisponivel) << endl;
                                         cout << "Compradores: ";
 
                                         l = jogos[j].compraCpfIngresso.size();
