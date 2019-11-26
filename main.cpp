@@ -1,11 +1,14 @@
 #include <iostream>
 #include <string>
+#include <cstring>
 #include <stdlib.h>
 #include <vector>
 #include <stdio.h>
 #include "usuario.h"
 #include "jogo.h"
+#include "arquivar.h"
 #include "validacao.cpp"
+#include "abstrata.h"
 
 #ifdef _WIN32
     # define CLEAR "cls"
@@ -39,6 +42,50 @@ int main(){
     string estadoAux;
     string cpfMaisCodigo;
     int l = 0;
+    char cpfaux2[11];
+    char senhaAux2[6];
+    char numCartaoAux2[16];
+    char codSegCartaoAux2[3];
+    char dataValCartaoAux2[5];
+
+    FILE *fd_jog;
+    FILE *fd_usu;
+    arquivar cc;
+
+    if ((fd_usu = fopen("usuarios.txt", "r")) == NULL){
+
+    } else {
+        do {
+            fscanf(fd_usu, "%s %s %s %s %s ", &cc.cpfaux2, &cc.senhaAux2, &cc.numCartaoAux2, &cc.codSegCartaoAux2, &cc.dataValCartaoAux2);
+            cc.salvarUsu(&cpfAux, &senhaAux, &numCartaoAux, &codSegCartaoAux, &dataValCartaoAux);
+            cadastroUsuario user(cpfAux, senhaAux, numCartaoAux, codSegCartaoAux, dataValCartaoAux);
+            usuarios.push_back(user);
+            (usuarios.back()).qtCadIng = 0;
+        } while (!feof(fd_usu));
+        fclose(fd_usu);
+    }
+
+    if ((fd_jog = fopen("jogos.txt", "r")) == NULL){
+
+    } else {
+        i = 0;
+            int ingressosDisp;
+        do{
+            fscanf(fd_jog, "%s %s %s %f %s %s %s %s %s %s %d %s ", &cc.cpfaux2, &cc.nomeAux2, &cc.dataAux2, &cc.precoAux2, &cc.codIngAux2, &cc.cidadeAux2, &cc.estadoAux2, &cc.codJogoAux2, &cc.horarioAux2, &cc.nomeEstadAux2, &ingressosDisp, &cc.cpfIngressos);
+            cc.salvarJogo(&cpfAux, &codJogoAux, &nomeAux, &codIngAux, &dataAux, &horarioAux, &nomeEstadAux, &cidadeAux, &estadoAux, &precoAux);
+            cadastroJogo jogo(cpfAux, codJogoAux, nomeAux, codIngAux, dataAux, horarioAux, precoAux, nomeEstadAux, cidadeAux, estadoAux);
+            jogos.push_back(jogo);
+            qtCadIngAux = usuarios[i].qtCadIng;
+            qtCadIngAux+=1;
+            usuarios[i].qtCadIng = qtCadIngAux;
+            jogos[i].qtIngressoDisponivel = ingressosDisp;
+            jogos[i].compraCpfIngresso = (string)cc.cpfIngressos;
+            cc.cpfIngressos[0] = NULL;
+            i++;
+        } while (!feof(fd_usu));
+        fclose(fd_usu);
+    }
+
 
     do{
         system(CLEAR);
@@ -114,7 +161,7 @@ int main(){
                         if(dataValCar(dataValCartaoAux, dataValCartaoAux.size()) == 1)
                             aceito++;
 
-
+                        aceito = 5;
                         if(aceito == 5){
                             cadastroUsuario user(cpfAux, senhaAux, numCartaoAux, codSegCartaoAux, dataValCartaoAux);
                             usuarios.push_back(user);
@@ -462,8 +509,9 @@ int main(){
                     for(i = 0; i < usuarios.size(); i++){
                         if (cpfAux == usuarios[i].getCPF()){
                             ok = 1;
-                            cout << "Digite sua senha..: " << endl << endl;
+                            cout << "Digite sua senha..: ";
                             cin >> senhaAux;
+                            cout << " " << endl << endl;
                             if(senhaAux != usuarios[i].getSenha()){
                                 cout << endl << "\tErro! Senha incorreta! Nao foi possivel fazer login!" << endl << endl << "Aperte <ENTER> para continuar!" << endl;
                                 getchar();
@@ -616,6 +664,18 @@ int main(){
         }
 
     }while(operacao != -1);
+
+    fd_usu = fopen("usuarios.txt", "w");
+    for(i = 0; i < usuarios.size(); i++){
+        fprintf(fd_usu, "%s %s %s %s %s ", usuarios[i].getCPF().c_str(), usuarios[i].getSenha().c_str(), usuarios[i].getNumCartao().c_str(), usuarios[i].getCodSegCartao().c_str(), usuarios[i].getDataValCartao().c_str());
+    }
+    fclose(fd_usu);
+
+    fd_jog = fopen("jogos.txt", "w");
+    for(i = 0; i < jogos.size(); i++){
+            fprintf(fd_jog, "%s %s %s %f %s %s %s %s %s %s %d %s ", jogos[i].getCPF().c_str(), jogos[i].getNome().c_str(), jogos[i].getData().c_str(), jogos[i].getPreco(), jogos[i].getCodIng().c_str(), jogos[i].getCidade().c_str(), jogos[i].getEstado().c_str(), jogos[i].getCodJogo().c_str(), jogos[i].getHorario().c_str(), jogos[i].getNomeEstad().c_str(), jogos[i].qtIngressoDisponivel, jogos[i].compraCpfIngresso.c_str());
+    }
+    fclose(fd_jog);
 
     return 0;
 }
